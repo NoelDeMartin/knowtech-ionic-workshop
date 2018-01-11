@@ -4,10 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "serve": "serve"
+    "serve": "serve",
+    "build": "tsc"
   },
   "devDependencies": {
-    "serve": "^6.4.4"
+    "serve": "^6.4.4",
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "jquery": "^3.2.1"
