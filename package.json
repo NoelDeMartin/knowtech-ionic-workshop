@@ -2,5 +2,11 @@
   "name": "knowtech-ionic-workshop",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js"
+  "main": "app.js",
+  "scripts": {
+    "serve": "serve"
+  },
+  "devDependencies": {
+    "serve": "^6.4.4"
+  }
 }

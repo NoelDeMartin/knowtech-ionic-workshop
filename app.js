@@ -1,3 +1,5 @@
-function sayHello() {
-    alert('Hi there!');
+import { sayHello } from './modules/greetings.js';
+
+window.buttonClicked = function() {
+    sayHello();
 }
