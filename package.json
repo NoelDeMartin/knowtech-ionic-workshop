@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "serve": "^6.4.4"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
   }
 }
