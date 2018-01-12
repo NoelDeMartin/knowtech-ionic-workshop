@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "serve": "serve",
-    "build": "tsc"
+    "build": "tsc && sass app.scss > build/app.css"
   },
   "devDependencies": {
+    "sass": "^1.0.0-beta.4",
     "serve": "^6.4.4",
     "typescript": "^2.6.2"
   },
