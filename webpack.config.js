@@ -7,14 +7,14 @@ module.exports = {
 
     entry: {
         app: [
-            './app.ts',
-            './app.scss'
+            './src/main.ts',
+            './src/app.scss'
         ]
     },
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].js'
+        filename: 'app.js'
     },
 
     module: {

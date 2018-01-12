@@ -2,7 +2,9 @@
     "compilerOptions": {
         "lib": [ "dom", "es2015" ],
         "target": "es2015",
-        "outDir": "build"
+        "outDir": "build",
+        "moduleResolution": "node",
+        "experimentalDecorators": true
     },
-    "files": [ "app.ts" ]
+    "files": [ "src/main.ts" ]
 }

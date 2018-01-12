@@ -2,7 +2,8 @@ $background-color: #e3e3e3;
 $button-color: #3490dc;
 $spacing: 8px;
 
-#app {
+example {
+    display: block;
     background: $background-color;
     padding: $spacing;
     text-align: center;
