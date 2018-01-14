@@ -1,0 +1,27 @@
+@import "../../variables";
+
+:host {
+    display: block;
+    background: #e3e3e3;
+    padding: $spacing;
+
+    h1 {
+        text-align: center;
+    }
+
+    .task-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            flex-grow: 1;
+        }
+
+        button {
+            margin-left: $spacing;
+        }
+
+    }
+
+}

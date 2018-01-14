@@ -1,0 +1,11 @@
+<h1>My Tasks ({{ remainingTasks }})</h1>
+
+<todo-item
+    *ngFor="let task of tasks"
+    [task]="task"
+></todo-item>
+
+<div class="task-form">
+    <input [(ngModel)]="newTask" type="text" />
+    <button (click)="addTask()">Add Task</button>
+</div>

@@ -1,0 +1,13 @@
+<span
+    class="name"
+    [class.completed]="task.completed"
+>
+    {{ task.name }}
+</span>
+
+<button
+    *ngIf="!task.completed"
+    (click)="complete()"
+>
+    Complete
+</button>

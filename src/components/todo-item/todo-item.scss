@@ -1,0 +1,30 @@
+@import "../../variables";
+
+$complete-button-color: #8BC34A;
+
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: $spacing;
+
+    &:not(:last-child) {
+        margin-bottom: $spacing;
+    }
+
+    .name.completed {
+        text-decoration: line-through;
+    }
+
+    button {
+        font-size: 1rem;
+        background-color: $complete-button-color;
+
+        &:hover {
+            background-color: darken($complete-button-color, 10%);
+        }
+
+    }
+
+}

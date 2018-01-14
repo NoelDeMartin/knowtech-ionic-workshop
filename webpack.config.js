@@ -8,7 +8,7 @@ module.exports = {
     entry: {
         app: [
             './src/main.ts',
-            './src/app.scss'
+            './src/app/app.scss'
         ]
     },
 
@@ -23,8 +23,19 @@ module.exports = {
 
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader',
+                use: [ 'ts-loader', 'angular2-template-loader' ],
                 exclude: /node_modules/
+            },
+
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    removeAttributeQuotes: false,
+                    keepClosingSlash: true,
+                    caseSensitive: true,
+                    conservativeCollapse: true,
+                }
             },
 
             {
@@ -32,7 +43,14 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     use: ['css-loader', 'sass-loader'],
                     fallback: 'style-loader'
-                })
+                }),
+                exclude: path.resolve(__dirname, 'src/components')
+            },
+
+            {
+                test: /\.scss$/,
+                use: ['raw-loader', 'sass-loader'],
+                include: path.resolve(__dirname, 'src/components')
             },
 
         ]
