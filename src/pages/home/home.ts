@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 
+import TasksStore from '../../providers/TasksStore';
+
 import Task from '../../models/Task';
 
 @Component({
@@ -9,17 +11,23 @@ import Task from '../../models/Task';
 })
 export class HomePage {
 
-    tasks: Task[] = [];
+    constructor(
+        private alertCtrl: AlertController,
+        private tasksStore: TasksStore
+    ) { }
 
-    constructor(private alertCtrl: AlertController) {
-        this.tasks.push(new Task('Foo'));
-        this.tasks.push(new Task('Bar', true));
+    get tasks(): Task[] {
+        return this.tasksStore.tasks;
     }
 
     get remainingTasks(): number {
         return this.tasks.filter((task: Task) => {
             return !task.completed;
         }).length;
+    }
+
+    public taskUpdated(task: Task): void {
+        this.tasksStore.update(this.tasks.indexOf(task), task);
     }
 
     public addTask(): void {
@@ -38,7 +46,7 @@ export class HomePage {
                 {
                     text: 'Create',
                     handler: data => {
-                        this.tasks.push(new Task(data.name));
+                        this.tasksStore.add(new Task(data.name));
                     }
                 }
             ]
