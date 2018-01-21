@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "lib": [ "dom", "es2015" ],
+        "target": "es3",
+        "outDir": "build"
+    },
+    "files": [ "src/app.ts" ]
+}
