@@ -35,6 +35,14 @@ export class ExpressBackend extends Backend {
             });
     }
 
+    public register(username: string, email: string, password: string): Promise<User> {
+        return this
+            .request(Config.backend_url + '/register', { username, email, password })
+            .then((json: UserJson) => {
+                return new User(json);
+            });
+    }
+
     private request(url: string, params: any = {}, method: 'POST' | 'GET' = 'POST'): Promise<any> {
 
         let options = {};

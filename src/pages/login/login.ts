@@ -14,7 +14,8 @@ import {
 
 import { Auth } from '../../providers/Auth';
 
-import { HomePage } from '../home/home';
+import { HomePage }     from '../home/home';
+import { RegisterPage } from '../register/register';
 
 @Component({
     selector: 'page-login',
@@ -64,7 +65,7 @@ export class LoginPage {
     }
 
     public register(): void {
-        // this.navCtrl.push(RegisterPage);
+        this.navCtrl.push(RegisterPage);
     }
 
     private showError(message: string) {

@@ -17,6 +17,7 @@ import { MyApp }    from './app.component';
 
 import { HomePage }     from '../pages/home/home';
 import { LoginPage }    from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 import { Backend }          from '../providers/Backend';
 import { Auth }             from '../providers/Auth';
@@ -26,7 +27,8 @@ import { ExpressBackend }   from '../providers/ExpressBackend';
     declarations: [
         MyApp,
         HomePage,
-        LoginPage
+        LoginPage,
+        RegisterPage
     ],
     imports: [
         BrowserModule,
@@ -37,7 +39,8 @@ import { ExpressBackend }   from '../providers/ExpressBackend';
     entryComponents: [
         MyApp,
         HomePage,
-        LoginPage
+        LoginPage,
+        RegisterPage
     ],
     providers: [
         Auth,
