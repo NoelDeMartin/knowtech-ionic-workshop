@@ -34,7 +34,7 @@ app.post('/register', (req: Request, res: Response) => {
     let password: string = req.body.password;
 
     if (!isValidName(name) || !isValidEmail(email) || !isValidPassword(password)) {
-        res.send({
+        res.status(400).send({
             error: 'validation',
             message: 'Validation failed'
         });
@@ -43,7 +43,7 @@ app.post('/register', (req: Request, res: Response) => {
 
     for (let user of users) {
         if (user.sameEmail(email)) {
-            res.send({
+            res.status(400).send({
                 error: 'validation',
                 message: 'Email already exists'
             });
@@ -58,10 +58,10 @@ app.post('/register', (req: Request, res: Response) => {
     res.send(user.toJson());
 });
 
-app.get('/login', (req: Request, res: Response) => {
+app.post('/login', (req: Request, res: Response) => {
 
-    let email: string = req.query.email;
-    let password: string = req.query.password;
+    let email: string = req.body.email;
+    let password: string = req.body.password;
 
     for (let user of users) {
         if (user.match(email, password)) {
@@ -70,7 +70,7 @@ app.get('/login', (req: Request, res: Response) => {
         }
     }
 
-    res.send({
+    res.status(400).send({
         error: 'not-found',
         message: 'Credentials don\'t match our records'
     });
