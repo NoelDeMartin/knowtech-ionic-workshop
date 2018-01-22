@@ -8,13 +8,13 @@ function generateId(): string {
 export default class User {
 
     private id: string;
-    private name: string;
+    private username: string;
     private email: string;
     private passwordHash: string;
 
-    constructor(name: string, email: string, password: string) {
+    constructor(username: string, email: string, password: string) {
         this.id = generateId();
-        this.name = name;
+        this.username = username;
         this.email = email;
         this.passwordHash = bcrypt.hashSync(password, 10);
     }
@@ -30,7 +30,7 @@ export default class User {
     public toJson(): Object {
         return {
             id: this.id,
-            name: this.name,
+            username: this.username,
             email: this.email
         };
     }

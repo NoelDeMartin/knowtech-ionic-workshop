@@ -1,5 +1,5 @@
-export function isValidName(name?: string) {
-    return !!name && name.length > 3;
+export function isValidUsername(username?: string) {
+    return !!username && username.length > 3;
 }
 
 export function isValidEmail(email?: string) {

@@ -13,7 +13,7 @@ import User from './models/User';
 
 import {
     isValidEmail,
-    isValidName,
+    isValidUsername,
     isValidPassword
 } from './validations';
 
@@ -29,11 +29,11 @@ const users = [
 
 app.post('/register', (req: Request, res: Response) => {
 
-    let name: string = req.body.name;
+    let username: string = req.body.username;
     let email: string = req.body.email;
     let password: string = req.body.password;
 
-    if (!isValidName(name) || !isValidEmail(email) || !isValidPassword(password)) {
+    if (!isValidUsername(username) || !isValidEmail(email) || !isValidPassword(password)) {
         res.status(400).send({
             error: 'validation',
             message: 'Validation failed'
@@ -51,7 +51,7 @@ app.post('/register', (req: Request, res: Response) => {
         }
     }
 
-    let user = new User(name, email, password);
+    let user = new User(username, email, password);
 
     users.push(user);
 
