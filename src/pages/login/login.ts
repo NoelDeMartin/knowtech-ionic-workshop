@@ -36,7 +36,7 @@ export class LoginPage {
     public submit(): void {
 
         if (!this.form.valid) {
-            UI.showError('Invalid form inputs');
+            UI.showError('Invalid credentials');
             return;
         }
 
