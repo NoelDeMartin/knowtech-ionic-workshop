@@ -76,5 +76,33 @@ app.post('/login', (req: Request, res: Response) => {
     });
 });
 
+app.post('/find-users', (req: Request, res: Response) => {
+
+    let usernames: string[] = req.body.usernames;
+    let userJsons: Object[] = [];
+
+    for (let username of usernames) {
+        for (let user of users) {
+            if (user.getUsername().toLowerCase() == username.toLowerCase()) {
+                userJsons.push(user.toJson());
+            }
+        }
+    }
+
+    res.send(userJsons);
+});
+
+app.post('/room', (req: Request, res: Response) => {
+
+    let creatorId: string = req.body.creator;
+    let topic: string = req.body.topic;
+    let members: string[] = req.body.members;
+
+    res.status(400).send({
+        error: 'not-implemented',
+        message: 'Create room not implemented: ' + topic
+    });
+});
+
 const port = 3000;
 app.listen(port, () => console.log('App listening on port ' + port + '!'));

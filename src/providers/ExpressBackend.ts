@@ -9,6 +9,11 @@ import {
     UserJson,
 } from '../models/User';
 
+import {
+    Room,
+    RoomJson,
+} from '../models/Room';
+
 import { Backend }  from './Backend';
 
 import Config from '../config.json';
@@ -37,6 +42,28 @@ export class ExpressBackend extends Backend {
             .request(Config.backend_url + '/register', { username, email, password })
             .then((json: UserJson) => {
                 return new User(json);
+            });
+    }
+
+    public findUsersByUsername(usernames: string[]): Promise<User[]> {
+        return this
+            .request(Config.backend_url + '/find-users', { usernames })
+            .then((jsons: UserJson[]) => {
+                return jsons.map((json: UserJson) => {
+                    return new User(json);
+                });
+            });
+    }
+
+    public createRoom(user: User, topic: string, members: string[]): Promise<Room> {
+        return this
+            .request(Config.backend_url + '/room', {
+                creator: user.id,
+                topic,
+                members
+            })
+            .then((json: RoomJson) => {
+                return new Room(json);
             });
     }
 

@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component }    from '@angular/core';
+
+import { CreateRoomModal }  from '../../modals/create-room/create-room';
+
+import UI   from '../../utils/UI';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
-
-  }
+    public createRoom(): void {
+        UI.showModal(CreateRoomModal);
+    }
 
 }

@@ -29,6 +29,10 @@ export class Auth {
         return !!this.user;
     }
 
+    public getUser(): User {
+        return this.user;
+    }
+
     public login(email: string, password: string): Promise<void> {
         return this.backend
             .login(email, password)

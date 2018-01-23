@@ -18,16 +18,20 @@ import { StatusBar }    from '@ionic-native/status-bar';
 import { MyApp }    from './app.component';
 
 import { Page }     from '../components/page/page';
+import { Modal }    from '../components/modal/modal';
 
 import { HomePage }     from '../pages/home/home';
 import { LoginPage }    from '../pages/login/login';
 import { SplashPage }   from '../pages/splash/splash';
 import { RegisterPage } from '../pages/register/register';
 
+import { CreateRoomModal }  from '../modals/create-room/create-room';
+
 import { Backend }          from '../providers/Backend';
 import { Auth }             from '../providers/Auth';
 import { ExpressBackend }   from '../providers/ExpressBackend';
 import { Storage }          from '../providers/Storage';
+import { Chat }             from '../providers/Chat';
 
 import { registerInjector } from '../utils/injector';
 
@@ -38,7 +42,9 @@ import { registerInjector } from '../utils/injector';
         LoginPage,
         SplashPage,
         RegisterPage,
-        Page
+        CreateRoomModal,
+        Page,
+        Modal
     ],
     imports: [
         BrowserModule,
@@ -51,10 +57,12 @@ import { registerInjector } from '../utils/injector';
         HomePage,
         LoginPage,
         SplashPage,
-        RegisterPage
+        RegisterPage,
+        CreateRoomModal
     ],
     providers: [
         Auth,
+        Chat,
         Storage,
         StatusBar,
         SplashScreen,
