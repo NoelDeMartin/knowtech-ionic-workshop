@@ -17,6 +17,8 @@ import { StatusBar }    from '@ionic-native/status-bar';
 
 import { MyApp }    from './app.component';
 
+import { Page }     from '../components/page/page';
+
 import { HomePage }     from '../pages/home/home';
 import { LoginPage }    from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -32,7 +34,8 @@ import { registerInjector } from '../utils/injector';
         MyApp,
         HomePage,
         LoginPage,
-        RegisterPage
+        RegisterPage,
+        Page
     ],
     imports: [
         BrowserModule,
