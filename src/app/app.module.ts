@@ -21,11 +21,13 @@ import { Page }     from '../components/page/page';
 
 import { HomePage }     from '../pages/home/home';
 import { LoginPage }    from '../pages/login/login';
+import { SplashPage }   from '../pages/splash/splash';
 import { RegisterPage } from '../pages/register/register';
 
 import { Backend }          from '../providers/Backend';
 import { Auth }             from '../providers/Auth';
 import { ExpressBackend }   from '../providers/ExpressBackend';
+import { Storage }          from '../providers/Storage';
 
 import { registerInjector } from '../utils/injector';
 
@@ -34,6 +36,7 @@ import { registerInjector } from '../utils/injector';
         MyApp,
         HomePage,
         LoginPage,
+        SplashPage,
         RegisterPage,
         Page
     ],
@@ -47,10 +50,12 @@ import { registerInjector } from '../utils/injector';
         MyApp,
         HomePage,
         LoginPage,
+        SplashPage,
         RegisterPage
     ],
     providers: [
         Auth,
+        Storage,
         StatusBar,
         SplashScreen,
         { provide: Backend, useClass: ExpressBackend },
