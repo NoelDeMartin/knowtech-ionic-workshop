@@ -6,15 +6,13 @@ import {
     Validators,
 } from '@angular/forms';
 
-import {
-    NavController,
-    AlertController,
-    LoadingController,
-} from 'ionic-angular';
+import { NavController }    from 'ionic-angular';
 
 import { Auth } from '../../providers/Auth';
+import UI       from '../../utils/UI';
 
 import { HomePage }     from '../home/home';
+
 import { RegisterPage } from '../register/register';
 
 @Component({
@@ -27,9 +25,7 @@ export class LoginPage {
 
     constructor(
         private auth: Auth,
-        private navCtrl: NavController,
-        private alertCtrl: AlertController,
-        private loadingCtrl: LoadingController
+        private navCtrl: NavController
     ) {
         this.form = new FormGroup({
             email: new FormControl('', Validators.required),
@@ -39,41 +35,26 @@ export class LoginPage {
 
     public submit(): void {
 
-        if (this.form.valid) {
+        if (!this.form.valid) {
+            UI.showError('Invalid form inputs');
+            return;
+        }
 
-            let loader = this.loadingCtrl.create();
-            loader.present();
-
+        UI.asyncOperation(
             this.auth
                 .login(
                     this.form.controls['email'].value,
                     this.form.controls['password'].value
                 )
                 .then(() => {
-                    loader.dismiss();
                     this.navCtrl.setRoot(HomePage);
                 })
-                .catch((error: Error) => {
-                    loader.dismiss();
-                    this.showError(error.message);
-                });
-
-        } else {
-            this.showError('Invalid form inputs');
-        }
+        );
 
     }
 
     public register(): void {
         this.navCtrl.push(RegisterPage);
-    }
-
-    private showError(message: string) {
-        this.alertCtrl.create({
-            title: 'Error',
-            message: message,
-            buttons: ['OK']
-        }).present();
     }
 
 }

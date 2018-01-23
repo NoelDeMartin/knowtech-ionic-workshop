@@ -6,13 +6,11 @@ import {
     Validators,
 } from '@angular/forms';
 
-import {
-    NavController,
-    AlertController,
-    LoadingController,
-} from 'ionic-angular';
+import { NavController }    from 'ionic-angular';
 
 import { Auth } from '../../providers/Auth';
+
+import UI       from '../../utils/UI';
 
 import { HomePage } from '../home/home';
 
@@ -26,9 +24,7 @@ export class RegisterPage {
 
     constructor(
         private auth: Auth,
-        private navCtrl: NavController,
-        private alertCtrl: AlertController,
-        private loadingCtrl: LoadingController
+        private navCtrl: NavController
     ) {
         this.form = new FormGroup({
             username: new FormControl('', Validators.required),
@@ -44,36 +40,22 @@ export class RegisterPage {
             !this.form.valid ||
             this.form.controls['password'].value !== this.form.controls['password_confirmation'].value
         ) {
-            this.showError('Invalid form inputs');
+            UI.showError('Invalid form inputs');
             return;
         }
 
-        let loader = this.loadingCtrl.create();
-        loader.present();
+        UI.asyncOperation(
+            this.auth
+                .register(
+                    this.form.controls['username'].value,
+                    this.form.controls['email'].value,
+                    this.form.controls['password'].value,
+                )
+                .then(() => {
+                    this.navCtrl.setRoot(HomePage);
+                })
+        );
 
-        this.auth
-            .register(
-                this.form.controls['username'].value,
-                this.form.controls['email'].value,
-                this.form.controls['password'].value,
-            )
-            .then(() => {
-                loader.dismiss();
-                this.navCtrl.setRoot(HomePage);
-            })
-            .catch((error: Error) => {
-                loader.dismiss();
-                this.showError(error.message);
-            });
-
-    }
-
-    private showError(message: string) {
-        this.alertCtrl.create({
-            title: 'Error',
-            message: message,
-            buttons: ['OK']
-        }).present();
     }
 
 }

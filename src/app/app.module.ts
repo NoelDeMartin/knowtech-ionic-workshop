@@ -1,7 +1,9 @@
 import { BrowserModule }    from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import {
+    APP_INITIALIZER,
     ErrorHandler,
+    Injector,
     NgModule
 } from '@angular/core';
 
@@ -22,6 +24,8 @@ import { RegisterPage } from '../pages/register/register';
 import { Backend }          from '../providers/Backend';
 import { Auth }             from '../providers/Auth';
 import { ExpressBackend }   from '../providers/ExpressBackend';
+
+import { registerInjector } from '../utils/injector';
 
 @NgModule({
     declarations: [
@@ -47,7 +51,8 @@ import { ExpressBackend }   from '../providers/ExpressBackend';
         StatusBar,
         SplashScreen,
         { provide: Backend, useClass: ExpressBackend },
-        { provide: ErrorHandler, useClass: IonicErrorHandler }
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        { provide: APP_INITIALIZER, useFactory: registerInjector, deps: [Injector], multi: true },
     ]
 })
 export class AppModule {}
