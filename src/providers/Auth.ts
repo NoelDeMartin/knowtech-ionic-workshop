@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '../models/User';
+import { User } from '@app/models/User';
 
 import { Backend } from './Backend';
 import { Storage } from './Storage';

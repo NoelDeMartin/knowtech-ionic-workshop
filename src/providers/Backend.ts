@@ -1,5 +1,5 @@
-import { User } from '../models/User';
-import { Room } from '../models/Room';
+import { User } from '@app/models/User';
+import { Room } from '@app/models/Room';
 
 export abstract class Backend {
 

@@ -1,7 +1,7 @@
 import { i18n }  from 'i18next';
 import * as I18Next from 'i18next';
 
-import English from '../lang/en.json';
+import English from '@app/lang/en.json';
 
 class Translator {
 

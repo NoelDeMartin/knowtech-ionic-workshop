@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 import { ViewController } from 'ionic-angular';
 
-import { Chat } from '../../providers/Chat';
+import { Chat } from '@app/providers/Chat';
 
-import UI from '../../utils/UI';
+import UI from '@app/utils/UI';
 
 @Component({
     selector: 'modal-create-room',

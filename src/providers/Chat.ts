@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '../models/User';
-import { Room } from '../models/Room';
+import { User } from '@app/models/User';
+import { Room } from '@app/models/Room';
 
-import { Auth } from './Auth';
-import { Backend } from './Backend';
+import { Auth }     from './Auth';
+import { Backend }  from './Backend';
 
 @Injectable()
 export class Chat {

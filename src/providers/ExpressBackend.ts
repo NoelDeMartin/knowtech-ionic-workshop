@@ -7,16 +7,16 @@ import {
 import {
     User,
     UserJson,
-} from '../models/User';
+} from '@app/models/User';
 
 import {
     Room,
     RoomJson,
-} from '../models/Room';
+} from '@app/models/Room';
 
 import { Backend }  from './Backend';
 
-import Config from '../config.json';
+import Config from '@app/config.json';
 
 @Injectable()
 export class ExpressBackend extends Backend {

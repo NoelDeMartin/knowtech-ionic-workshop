@@ -8,12 +8,12 @@ import {
 
 import { NavController }    from 'ionic-angular';
 
-import { Auth } from '../../providers/Auth';
-import UI       from '../../utils/UI';
+import { Auth } from '@app/providers/Auth';
+import UI       from '@app/utils/UI';
 
-import { HomePage }     from '../home/home';
+import { HomePage }     from '@app/pages/home/home';
 
-import { RegisterPage } from '../register/register';
+import { RegisterPage } from '@app/pages/register/register';
 
 @Component({
     selector: 'page-login',

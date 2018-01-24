@@ -1,6 +1,6 @@
 import { FormGroup as AngularFromGroup }    from '@angular/forms';
 
-import Translator   from '../utils/Translator';
+import Translator   from '@app/utils/Translator';
 
 export class FormGroup extends AngularFromGroup {
 

@@ -4,12 +4,12 @@ import { Platform }     from 'ionic-angular';
 import { StatusBar }    from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { SplashPage }   from '../pages/splash/splash';
-import { LoginPage }    from '../pages/login/login';
-import { HomePage }     from '../pages/home/home';
+import { SplashPage }   from '@app/pages/splash/splash';
+import { LoginPage }    from '@app/pages/login/login';
+import { HomePage }     from '@app/pages/home/home';
 
-import { Auth }     from '../providers/Auth';
-import { Backend }  from '../providers/Backend';
+import { Auth }     from '@app/providers/Auth';
+import { Backend }  from '@app/providers/Backend';
 
 interface Service {
     init(): Promise<any>;

@@ -1,8 +1,8 @@
 import { Component }    from '@angular/core';
 
-import { CreateRoomModal }  from '../../modals/create-room/create-room';
+import { CreateRoomModal }  from '@app/modals/create-room/create-room';
 
-import UI   from '../../utils/UI';
+import UI   from '@app/utils/UI';
 
 @Component({
     selector: 'page-home',

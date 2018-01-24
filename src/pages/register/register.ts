@@ -4,14 +4,14 @@ import { FormControl }  from '@angular/forms';
 
 import { NavController }    from 'ionic-angular';
 
-import { FormGroup }    from '../../forms/FormGroup';
-import { Validators }   from '../../forms/Validators';
+import { FormGroup }    from '@app/forms/FormGroup';
+import { Validators }   from '@app/forms/Validators';
 
-import { Auth } from '../../providers/Auth';
+import { Auth } from '@app/providers/Auth';
 
-import UI       from '../../utils/UI';
+import UI       from '@app/utils/UI';
 
-import { HomePage } from '../home/home';
+import { HomePage } from '@app/pages/home/home';
 
 @Component({
     selector: 'page-register',
