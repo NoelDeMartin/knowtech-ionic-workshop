@@ -27,6 +27,10 @@ export default class User {
         return this.email == email;
     }
 
+    public getId(): string {
+        return this.id;
+    }
+
     public getUsername(): string {
         return this.username;
     }

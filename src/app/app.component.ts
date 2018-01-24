@@ -9,6 +9,7 @@ import { LoginPage }    from '@app/pages/login/login';
 import { HomePage }     from '@app/pages/home/home';
 
 import { Auth }     from '@app/providers/Auth';
+import { Chat }     from '@app/providers/Chat';
 import { Backend }  from '@app/providers/Backend';
 
 interface Service {
@@ -24,13 +25,14 @@ export class MyApp {
 
     constructor(
         auth: Auth,
+        chat: Chat,
         backend: Backend,
         platform: Platform,
         statusBar: StatusBar,
         splashScreen: SplashScreen
     ) {
 
-        this.initServices(backend, auth)
+        this.initServices(backend, auth, chat)
             .then(() => {
                 this.rootPage = auth.isLoggedIn()? HomePage : LoginPage;
             });

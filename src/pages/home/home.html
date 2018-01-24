@@ -1,5 +1,17 @@
 <page>
 
+    <ion-list>
+
+        <button ion-item *ngFor="let room of rooms | async" (click)="openRoom(room)">
+            {{ room.topic }}
+        </button>
+
+        <ion-item *ngIf="(rooms | async).length == 0">
+            {{ 'home.no_rooms' | translate }}
+        </ion-item>
+
+    </ion-list>
+
     <div padding>
         <button ion-button block (click)="createRoom()">
             {{ 'home.create_room' | translate }}

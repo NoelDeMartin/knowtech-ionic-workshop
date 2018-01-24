@@ -10,6 +10,8 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
 import User from './models/User';
+import Room from './models/Room';
+import Message from './models/Message';
 
 import {
     isValidEmail,
@@ -25,6 +27,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const users = [
     new User('Jhon Doe', 'test@example.com', 'secret')
+];
+
+const rooms = [
+    new Room('Echo Chamber', users[0].getId(), [users[0].getId()])
 ];
 
 app.post('/register', (req: Request, res: Response) => {
@@ -92,15 +98,67 @@ app.post('/find-users', (req: Request, res: Response) => {
     res.send(userJsons);
 });
 
+app.post('/rooms', (req: Request, res: Response) => {
+
+    let userId: string = req.body.user_id;
+    let userRooms: Room[] = [];
+
+    for (let room of rooms) {
+        if (room.hasMember(userId)) {
+            userRooms.push(room);
+        }
+    }
+
+    res.send(userRooms.map((room: Room) => room.toJson()))
+});
+
+app.post('/messages', (req: Request, res: Response) => {
+
+    let roomId: string = req.body.room_id;
+    let messages: Message[] = [];
+
+    for (let room of rooms) {
+        if (room.getId() == roomId) {
+            res.send(room.getMessages().map((message: Message) => message.toJson(users)));
+            return;
+        }
+    }
+
+    res.status(404).send({
+        error: 'not-found',
+        message: 'Room does not exist'
+    });
+});
+
 app.post('/room', (req: Request, res: Response) => {
 
-    let creatorId: string = req.body.creator;
     let topic: string = req.body.topic;
-    let members: string[] = req.body.members;
+    let creatorId: string = req.body.creator_id;
+    let memberIds: string[] = req.body.member_ids;
 
-    res.status(400).send({
-        error: 'not-implemented',
-        message: 'Create room not implemented: ' + topic
+    let room = new Room(topic, creatorId, memberIds);
+
+    rooms.push(room);
+
+    res.send(room.toJson());
+});
+
+app.post('/message', (req: Request, res: Response) => {
+
+    let roomId: string = req.body.room_id;
+    let authorId: string = req.body.author_id;
+    let text: string = req.body.text;
+
+    for (let room of rooms) {
+        if (room.getId() == roomId) {
+            res.send(room.addMessage(text, authorId).toJson(users));
+            return;
+        }
+    }
+
+    res.status(404).send({
+        error: 'not-found',
+        message: 'Room does not exist'
     });
 });
 

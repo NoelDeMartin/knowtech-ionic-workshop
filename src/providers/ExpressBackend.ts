@@ -14,9 +14,19 @@ import {
     RoomJson,
 } from '@app/models/Room';
 
-import { Backend }  from './Backend';
+import {
+    Message,
+    MessageJson,
+} from '@app/models/Message';
+
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import Config from '@app/config.json';
+
+import {
+    Backend,
+    BackendObservation
+}  from './Backend';
 
 @Injectable()
 export class ExpressBackend extends Backend {
@@ -58,12 +68,73 @@ export class ExpressBackend extends Backend {
     public createRoom(user: User, topic: string, members: string[]): Promise<Room> {
         return this
             .request(Config.backend_url + '/room', {
-                creator: user.id,
                 topic,
-                members
+                creator_id: user.id,
+                member_ids: members
             })
             .then((json: RoomJson) => {
                 return new Room(json);
+            });
+    }
+
+    public listenRooms(userId: string): BackendObservation<Room[]> {
+
+        let subject: BehaviorSubject<Room[]> = new BehaviorSubject([]);
+
+        let request = () => {
+            this.request(Config.backend_url + '/rooms', { user_id: userId })
+                .then((jsons: RoomJson[]) => {
+                    subject.next(jsons.map((json: RoomJson) => {
+                        return new Room(json);
+                    }));
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
+        request();
+
+        let interval = setInterval(request, 5000);
+
+        return {
+            observable: subject.asObservable(),
+            unsubscribe() { clearInterval(interval); }
+        };
+    }
+
+    public listenRoomMessages(roomId: string): BackendObservation<Message[]> {
+
+        let subject: BehaviorSubject<Message[]> = new BehaviorSubject([]);
+
+        let request = () => {
+            this.request(Config.backend_url + '/messages', { room_id: roomId })
+                .then((jsons: MessageJson[]) => {
+                    subject.next(jsons.map((json: MessageJson) => {
+                        return new Message(json);
+                    }));
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
+        request();
+
+        let interval = setInterval(request, 5000);
+
+        return {
+            observable: subject.asObservable(),
+            unsubscribe() { clearInterval(interval); }
+        };
+    }
+
+    public sendMessage(roomId: string, authorId: string, text: string): Promise<void> {
+        return this
+            .request(Config.backend_url + '/message', {
+                room_id: roomId,
+                author_id: authorId,
+                text: text
             });
     }
 

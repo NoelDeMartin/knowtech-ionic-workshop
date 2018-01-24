@@ -14,7 +14,13 @@
     },
 
     "home": {
+        "no_rooms": "You are not member of any chat room",
         "create_room": "Create Room"
+    },
+
+    "room": {
+        "send_message": "Send",
+        "message_placeholder": "Write a message..."
     },
 
     "validation": {

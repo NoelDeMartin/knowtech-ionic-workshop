@@ -21,6 +21,7 @@ import { Modal }    from '@app/components/modal/modal';
 import { TranslatePipe }    from '@app/pipes/Translate';
 
 import { HomePage }     from '@app/pages/home/home';
+import { RoomPage }     from '@app/pages/room/room';
 import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
 import { RegisterPage } from '@app/pages/register/register';
@@ -41,6 +42,7 @@ import { MyApp } from './app.component';
     declarations: [
         MyApp,
         HomePage,
+        RoomPage,
         LoginPage,
         SplashPage,
         RegisterPage,
@@ -58,6 +60,7 @@ import { MyApp } from './app.component';
     entryComponents: [
         MyApp,
         HomePage,
+        RoomPage,
         LoginPage,
         SplashPage,
         RegisterPage,
