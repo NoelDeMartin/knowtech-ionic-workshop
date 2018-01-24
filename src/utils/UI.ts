@@ -5,6 +5,8 @@ import {
     LoadingController,
 } from 'ionic-angular';
 
+import Translator from './Translator';
+
 import { resolveDependency } from './injector';
 
 class UI {
@@ -27,7 +29,7 @@ class UI {
                 if (error instanceof Error) {
                     this.showError(error.message);
                 } else {
-                    this.showError('Unknown error');
+                    this.showError(Translator.trans('errors.unknown'));
                 }
             });
     }
@@ -61,9 +63,11 @@ class UI {
         }
 
         this.alertCtrl.create({
-            title: 'Error',
+            title: Translator.trans('errors.title'),
             message: message,
-            buttons: ['OK']
+            buttons: [
+                Translator.trans('errors.accept')
+            ]
         }).present();
 
     }

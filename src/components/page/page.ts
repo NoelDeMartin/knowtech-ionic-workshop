@@ -3,12 +3,14 @@ import {
     Component
 } from '@angular/core';
 
+import Translator from '@app/utils/Translator';
+
 @Component({
     selector: 'page',
     templateUrl: './page.html',
 })
 export class Page {
 
-    @Input() title: string = 'Knowtech Chat';
+    @Input() title: string = Translator.trans('title');
 
 }

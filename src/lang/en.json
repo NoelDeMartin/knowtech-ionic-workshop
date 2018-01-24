@@ -1,13 +1,39 @@
 {
+
+    "title": "Knowtech Chat",
+
+    "login": {
+        "title": "Login",
+        "submit": "Login",
+        "register": "No account? Create one"
+    },
+
+    "register": {
+        "title": "Register",
+        "submit": "Create Account"
+    },
+
+    "home": {
+        "create_room": "Create Room"
+    },
+
     "validation": {
         "required": "Field :field is required",
         "email": "Field :field is not a valid email",
         "equals": "Field :field does not match"
     },
+
     "fields": {
         "username": "Username",
         "email": "Email",
         "password": "Password",
         "password_confirmation": "Password Confirmation"
+    },
+
+    "errors": {
+        "title": "Error",
+        "unknown": "Unknown error",
+        "accept": "OK"
     }
+
 }

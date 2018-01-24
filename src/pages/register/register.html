@@ -1,31 +1,33 @@
-<page title="Register">
+<page [title]="'register.title' | translate">
 
     <ion-list>
 
         <form [formGroup]="form">
 
             <ion-item>
-                <ion-label floating>Username</ion-label>
+                <ion-label floating>{{ 'fields.username' | translate }}</ion-label>
                 <ion-input type="text" formControlName="username"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Email</ion-label>
+                <ion-label floating>{{ 'fields.email' | translate }}</ion-label>
                 <ion-input type="email" formControlName="email"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Password</ion-label>
+                <ion-label floating>{{ 'fields.password' | translate }}</ion-label>
                 <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Password Confirmation</ion-label>
+                <ion-label floating>{{ 'fields.password_confirmation' | translate }}</ion-label>
                 <ion-input type="password" formControlName="password_confirmation"></ion-input>
             </ion-item>
 
             <div padding>
-                <button ion-button block (click)="submit()">Create account</button>
+                <button ion-button block (click)="submit()">
+                     {{ 'register.submit' | translate }}
+                </button>
             </div>
 
         </form>

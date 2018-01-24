@@ -18,6 +18,8 @@ import { StatusBar }    from '@ionic-native/status-bar';
 import { Page }     from '@app/components/page/page';
 import { Modal }    from '@app/components/modal/modal';
 
+import { TranslatePipe }    from '@app/pipes/Translate';
+
 import { HomePage }     from '@app/pages/home/home';
 import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
@@ -44,7 +46,8 @@ import { MyApp } from './app.component';
         RegisterPage,
         CreateRoomModal,
         Page,
-        Modal
+        Modal,
+        TranslatePipe
     ],
     imports: [
         BrowserModule,

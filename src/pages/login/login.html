@@ -1,21 +1,23 @@
-<page title="Login">
+<page [title]="'login.title' | translate">
 
     <ion-list>
 
         <form [formGroup]="form">
 
             <ion-item>
-                <ion-label floating>Email</ion-label>
+                <ion-label floating>{{ 'fields.email' | translate }}</ion-label>
                 <ion-input type="email" formControlName="email"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Password</ion-label>
+                <ion-label floating>{{ 'fields.password' | translate }}</ion-label>
                 <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
 
             <div padding>
-                <button ion-button block (click)="submit()">Login</button>
+                <button ion-button block (click)="submit()">
+                    {{ 'login.submit' | translate }}
+                </button>
             </div>
 
         </form>
@@ -23,7 +25,9 @@
     </ion-list>
 
     <div padding>
-        <button ion-button block clear (click)="register()">No account? Create one</button>
+        <button ion-button block clear (click)="register()">
+            {{ 'login.register' | translate }}
+        </button>
     </div>
 
 </page>
