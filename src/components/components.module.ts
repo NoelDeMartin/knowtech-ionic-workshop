@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
-import { Page, OptionsMenu } from './page/page';
-import { Modal } from './modal/modal';
+import { Page, OptionsMenu }    from './page/page';
+import { Modal }                from './modal/modal';
+import { LineChart }            from './line-chart/line-chart';
 
 @NgModule({
     declarations: [
         OptionsMenu,
         Page,
-        Modal
+        Modal,
+        LineChart
     ],
     imports: [
         IonicModule
@@ -16,12 +18,14 @@ import { Modal } from './modal/modal';
     entryComponents: [
         OptionsMenu,
         Page,
-        Modal
+        Modal,
+        LineChart
     ],
     exports: [
         OptionsMenu,
         Page,
-        Modal
+        Modal,
+        LineChart
     ]
 })
 export class ComponentsModule { }

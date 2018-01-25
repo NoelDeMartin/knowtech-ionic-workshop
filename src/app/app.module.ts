@@ -23,6 +23,7 @@ import { SplashPage }   from '@app/pages/splash/splash';
 import { RegisterPage } from '@app/pages/register/register';
 
 import { CreateRoomModal }  from '@app/modals/create-room/create-room';
+import { StatsModal }       from '@app/modals/stats/stats';
 
 import { Backend }          from '@app/providers/Backend';
 import { Auth }             from '@app/providers/Auth';
@@ -41,6 +42,7 @@ import { MyApp } from './app.component';
         SplashPage,
         RegisterPage,
         CreateRoomModal,
+        StatsModal,
     ],
     imports: [
         BrowserModule,
@@ -56,6 +58,7 @@ import { MyApp } from './app.component';
         SplashPage,
         RegisterPage,
         CreateRoomModal,
+        StatsModal,
     ],
     providers: [
         Auth,

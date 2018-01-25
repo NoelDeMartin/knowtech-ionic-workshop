@@ -15,7 +15,8 @@
 
     "home": {
         "no_rooms": "You are not member of any chat room",
-        "logout": "Logout"
+        "logout": "Logout",
+        "stats": "Show statistics"
     },
 
     "room": {
@@ -31,10 +32,16 @@
     },
 
     "create-room": {
+        "title": "Add new room",
         "topic": "Topic",
         "member": "Member :member (username)",
         "add_member": "Add Member",
         "submit": "Create"
+    },
+
+    "stats": {
+        "title": "Statistics",
+        "messages": "# messages"
     },
 
     "validation": {

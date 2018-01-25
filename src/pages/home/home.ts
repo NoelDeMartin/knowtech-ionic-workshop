@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { CreateRoomModal }  from '@app/modals/create-room/create-room';
+import { StatsModal }       from '@app/modals/stats/stats';
 
 import { Chat } from '@app/providers/Chat';
 import { Auth } from '@app/providers/Auth';
@@ -53,6 +54,11 @@ export class HomePage {
             callback: this.logout.bind(this)
         });
 
+        this.options.push({
+            text: Translator.trans('home.stats'),
+            callback: this.showStats.bind(this)
+        });
+
     }
 
     get rooms(): Observable<Room[]> {
@@ -75,6 +81,10 @@ export class HomePage {
                     this.navCtrl.setRoot(LoginPage);
                 })
         );
+    }
+
+    public showStats(): void {
+        UI.showModal(StatsModal);
     }
 
 }

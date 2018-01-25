@@ -13,7 +13,6 @@ import AsyncProvider from './AsyncProvider';
 @Injectable()
 export class Chat extends AsyncProvider {
 
-    private initialized: boolean = false;
     private roomsObservable: Observable<Room[]> = null;
 
     private messageObservations: {
