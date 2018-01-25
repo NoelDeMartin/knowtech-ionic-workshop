@@ -3,8 +3,10 @@ import {
     ViewChild,
     ElementRef,
 } from '@angular/core';
+
 import {
     NavParams,
+    IonicPage,
     AlertController,
 } from 'ionic-angular';
 
@@ -22,7 +24,13 @@ import { User }     from '@app/models/User';
 
 import UI           from '@app/utils/UI';
 import Translator   from '@app/utils/Translator';
+import AsyncProvider from '@app/providers/AsyncProvider';
 
+@IonicPage({
+    name: 'room',
+    segment: 'room/:id',
+    defaultHistory: [ 'home' ]
+})
 @Component({
     selector: 'page-room',
     templateUrl: 'room.html'
@@ -38,6 +46,7 @@ export class RoomPage {
 
     actions: PageAction[] = [];
 
+    private ready: Promise<void>;
     private subscription: Subscription;
 
     constructor(
@@ -46,12 +55,25 @@ export class RoomPage {
         private alertCtrl: AlertController,
         params: NavParams
     ) {
-        this.room = params.get('room');
-        this.roomMessages = this.chat.listenRoomMessages(this.room.id);
-
         this.actions.push({
             icon: 'person-add',
             callback: this.addMember.bind(this)
+        });
+
+        this.ready = AsyncProvider.sync(auth, chat).then(() => {
+            let roomId = params.get('id');
+            let subscription = this.chat.rooms.subscribe((rooms: Room[]) => {
+                if (this.room) {
+                    subscription.unsubscribe();
+                }
+                for (let room of rooms) {
+                    if (room.id == roomId) {
+                        this.room = room;
+                        this.roomMessages = this.chat.listenRoomMessages(this.room.id);
+                        break;
+                    }
+                }
+            });
         });
     }
 
@@ -60,17 +82,24 @@ export class RoomPage {
     }
 
     ionViewWillEnter() {
-        let messagesCount = 0;
-        this.subscription = this.roomMessages.subscribe((messages: Message[]) => {
-            if (messagesCount < messages.length) {
-                messagesCount = messages.length;
-                UI.nextTick(this.scrollToBottom.bind(this));
-            }
-        });
+        this.ready.then(() => {
+            let messagesCount = 0;
+            this.subscription = this.roomMessages.subscribe((messages: Message[]) => {
+                if (messagesCount < messages.length) {
+                    messagesCount = messages.length;
+                    UI.nextTick(this.scrollToBottom.bind(this));
+                }
+            });
+        })
     }
 
     ionViewWillLeave() {
-        this.subscription.unsubscribe();
+        this.ready.then(() => {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+                this.subscription = null;
+            }
+        });
     }
 
     public sendMessage(): void {

@@ -1,6 +1,9 @@
 import { Component }    from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {
+    IonicPage,
+    NavController
+} from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -11,7 +14,6 @@ import { Auth } from '@app/providers/Auth';
 
 import { Room } from '@app/models/Room';
 
-import { RoomPage } from '@app/pages/room/room';
 import { LoginPage } from '@app/pages/login/login';
 
 import {
@@ -22,6 +24,10 @@ import {
 import UI           from '@app/utils/UI';
 import Translator   from '@app/utils/Translator';
 
+@IonicPage({
+    name: 'home',
+    segment: 'home'
+})
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -54,7 +60,7 @@ export class HomePage {
     }
 
     public openRoom(room: Room): void {
-        this.navCtrl.push(RoomPage, { room: room });
+        this.navCtrl.push('room', { id: room.id });
     }
 
     public createRoom(): void {

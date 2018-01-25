@@ -11,8 +11,6 @@ import { Auth } from '@app/providers/Auth';
 
 import UI       from '@app/utils/UI';
 
-import { HomePage } from '@app/pages/home/home';
-
 @Component({
     selector: 'page-register',
     templateUrl: 'register.html'
@@ -49,7 +47,7 @@ export class RegisterPage {
                         this.form.controls['password'].value,
                     )
                     .then(() => {
-                        this.navCtrl.setRoot(HomePage);
+                        this.navCtrl.setRoot('home');
                     })
             );
 

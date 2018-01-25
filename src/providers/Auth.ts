@@ -5,24 +5,27 @@ import { User } from '@app/models/User';
 import { Backend } from './Backend';
 import { Storage } from './Storage';
 
+import AsyncProvider from './AsyncProvider';
+
 const STORAGE_KEY = "Auth";
 
 @Injectable()
-export class Auth {
+export class Auth extends AsyncProvider {
 
     private user: User;
 
-    constructor(private storage: Storage, private backend: Backend) { }
+    constructor(private storage: Storage, private backend: Backend) {
+        super();
+    }
 
-    public init(): Promise<void> {
-        return new Promise((resolve) => {
-
-            if (this.storage.has(STORAGE_KEY)) {
-                this.user = this.storage.get(STORAGE_KEY);
-            }
-
-            resolve();
-        });
+    protected initialize(): Promise<void> {
+        return AsyncProvider
+            .sync(this.backend)
+            .then(() => {
+                if (this.storage.has(STORAGE_KEY)) {
+                    this.user = this.storage.get(STORAGE_KEY);
+                }
+            });
     }
 
     public isLoggedIn(): boolean {

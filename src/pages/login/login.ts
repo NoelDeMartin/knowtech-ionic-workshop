@@ -11,8 +11,6 @@ import { NavController }    from 'ionic-angular';
 import { Auth } from '@app/providers/Auth';
 import UI       from '@app/utils/UI';
 
-import { HomePage }     from '@app/pages/home/home';
-
 import { RegisterPage } from '@app/pages/register/register';
 
 @Component({
@@ -47,7 +45,7 @@ export class LoginPage {
                     this.form.controls['password'].value
                 )
                 .then(() => {
-                    this.navCtrl.setRoot(HomePage);
+                    this.navCtrl.setRoot('home');
                 })
         );
 

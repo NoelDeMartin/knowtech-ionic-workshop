@@ -35,7 +35,7 @@ export class ExpressBackend extends Backend {
         super();
     }
 
-    public init(): Promise<void> {
+    protected initialize(): Promise<void> {
         return Promise.resolve();
     }
 

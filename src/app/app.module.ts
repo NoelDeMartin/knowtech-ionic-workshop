@@ -7,6 +7,9 @@ import {
     NgModule
 } from '@angular/core';
 
+import { PipesModule } from '@app/pipes/pipes.module';
+import { ComponentsModule } from '@app/components/components.module';
+
 import {
     IonicApp,
     IonicErrorHandler,
@@ -15,16 +18,6 @@ import {
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar }    from '@ionic-native/status-bar';
 
-import {
-    Page,
-    OptionsMenu
-} from '@app/components/page/page';
-import { Modal }    from '@app/components/modal/modal';
-
-import { TranslatePipe }    from '@app/pipes/Translate';
-
-import { HomePage }     from '@app/pages/home/home';
-import { RoomPage }     from '@app/pages/room/room';
 import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
 import { RegisterPage } from '@app/pages/register/register';
@@ -44,32 +37,25 @@ import { MyApp } from './app.component';
 @NgModule({
     declarations: [
         MyApp,
-        HomePage,
-        RoomPage,
         LoginPage,
         SplashPage,
         RegisterPage,
         CreateRoomModal,
-        Page,
-        OptionsMenu,
-        Modal,
-        TranslatePipe
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+        PipesModule,
+        ComponentsModule,
         IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        OptionsMenu,
         MyApp,
-        HomePage,
-        RoomPage,
         LoginPage,
         SplashPage,
         RegisterPage,
-        CreateRoomModal
+        CreateRoomModal,
     ],
     providers: [
         Auth,

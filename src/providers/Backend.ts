@@ -4,14 +4,14 @@ import { User }     from '@app/models/User';
 import { Room }     from '@app/models/Room';
 import { Message }  from '@app/models/Message';
 
+import AsyncProvider from './AsyncProvider';
+
 export interface BackendObservation<T> {
     observable: Observable<T>;
     unsubscribe: Function;
 }
 
-export abstract class Backend {
-
-    abstract init(): Promise<void>;
+export abstract class Backend extends AsyncProvider {
 
     abstract login(email: string, password: string): Promise<User>;
 

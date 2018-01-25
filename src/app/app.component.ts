@@ -6,15 +6,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SplashPage }   from '@app/pages/splash/splash';
 import { LoginPage }    from '@app/pages/login/login';
-import { HomePage }     from '@app/pages/home/home';
 
 import { Auth }     from '@app/providers/Auth';
 import { Chat }     from '@app/providers/Chat';
 import { Backend }  from '@app/providers/Backend';
-
-interface Service {
-    init(): Promise<any>;
-}
+import AsyncProvider from '@app/providers/AsyncProvider';
 
 @Component({
     templateUrl: 'app.html'
@@ -32,9 +28,9 @@ export class MyApp {
         splashScreen: SplashScreen
     ) {
 
-        this.initServices(backend, auth, chat)
+        AsyncProvider.sync(backend, auth, chat)
             .then(() => {
-                this.rootPage = auth.isLoggedIn()? HomePage : LoginPage;
+                this.rootPage = auth.isLoggedIn()? 'home' : LoginPage;
             });
 
         platform.ready().then(() => {
@@ -44,17 +40,6 @@ export class MyApp {
             splashScreen.hide();
         });
 
-    }
-
-    private initServices(...services: Service[]): Promise<void> {
-
-        let promise = Promise.resolve();
-
-        for (let service of services) {
-            promise = promise.then(() => service.init());
-        }
-
-        return promise;
     }
 
 }
