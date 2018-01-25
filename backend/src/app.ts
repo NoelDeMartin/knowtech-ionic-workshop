@@ -26,12 +26,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const users = [
-    new User('Jhon Doe', 'test@example.com', 'secret')
+    new User('Jhon Doe', 'jhon@example.com', 'secret'),
+    new User('Jane Doe', 'jane@example.com', 'secret'),
 ];
 
 const rooms = [
-    new Room('Echo Chamber', users[0].getId(), [users[0].getId()])
+    new Room('Echo Chamber', users[0].getId(), [users[0].getId()]),
+    new Room('Chat with Jane', users[0].getId(), [users[0].getId(), users[1].getId()]),
 ];
+
+rooms[1].addMessage("Lorem ipsum dolor sit amet", users[0].getId());
+rooms[1].addMessage("consectetur adipiscing elit", users[0].getId());
+rooms[1].addMessage("Cras porta sit amet urna a consectetur", users[1].getId());
+rooms[1].addMessage("Pellentesque vulputate ex ut ligula iaculis porttitor", users[0].getId());
+rooms[1].addMessage("Suspendisse potenti", users[1].getId());
+rooms[1].addMessage("Aenean porta interdum cursus", users[1].getId());
 
 app.post('/register', (req: Request, res: Response) => {
 

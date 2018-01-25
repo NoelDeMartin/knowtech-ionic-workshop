@@ -1,4 +1,7 @@
-<page [title]="room.topic">
+<page
+    [title]="room.topic"
+    subtitle="{{ 'room.subtitle' | translate: { members: room.memberIds.length } }}"
+>
 
     <div class="messages" #messages padding>
 

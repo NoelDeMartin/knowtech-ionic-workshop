@@ -82,6 +82,43 @@ class UI {
 
     }
 
+    /**
+     * Run some code after Angular's change detection. This is important
+     * if any actions needs to directly manipulate DOM state.
+     *
+     * More information about angular's tick: https://angular.io/api/core/ApplicationRef#!#tick-anchor
+     */
+    public nextTick(callback: Function): void {
+        setTimeout(callback, 0);
+    }
+
+    /**
+     * There are multiple libraries available to animate properties in different ways,
+     * but sometimes a simple implementation such as this can get the job done.
+     */
+    public animate(
+        object: any,
+        property: string,
+        targetValue: number,
+        duration: number = 1000
+    ): void {
+
+        let startValue: number = object[property];
+        let start: number = Date.now();
+
+        let animationRenderFrame = () => {
+
+            let progress = Math.min((Date.now() - start) / duration, 1);
+            object[property] = startValue + (targetValue - startValue) * progress;
+
+            if (progress < 1) window.requestAnimationFrame(animationRenderFrame);
+
+        };
+
+        window.requestAnimationFrame(animationRenderFrame);
+
+    }
+
 }
 
 export default new UI();

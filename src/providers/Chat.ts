@@ -50,7 +50,7 @@ export class Chat {
             this.messageObservations[roomId].unsubscribe();
         }
 
-        this.messageObservations[roomId] = this.backend.listenRoomMessages(this.auth.getUser().id);
+        this.messageObservations[roomId] = this.backend.listenRoomMessages(roomId);
 
         return this.messageObservations[roomId].observable;
     }

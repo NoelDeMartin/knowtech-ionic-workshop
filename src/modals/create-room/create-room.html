@@ -3,24 +3,26 @@
     <ion-list>
 
         <ion-item>
-            <ion-label floating>Topic</ion-label>
+            <ion-label floating>{{ 'create-room.topic' | translate }}</ion-label>
             <ion-input type="text" [(ngModel)]="topic"></ion-input>
         </ion-item>
 
         <ion-item *ngFor="let member of memberIndexes">
-            <ion-label floating>Member {{ member + 1 }} (username)</ion-label>
+            <ion-label floating>{{ 'create-room.member' | translate: { member: member + 1 } }}</ion-label>
             <ion-input type="text" [(ngModel)]="members[member]"></ion-input>
         </ion-item>
 
         <div text-right padding-top>
             <button ion-button clear icon-start (click)="members.push('')">
                 <ion-icon name='person-add'></ion-icon>
-                Add Member
+                {{ 'create-room.add_member' | translate }}
             </button>
         </div>
 
         <div padding>
-            <button ion-button block (click)="submit()">Create</button>
+            <button ion-button block (click)="submit()">
+                {{ 'create-room.submit' | translate }}
+            </button>
         </div>
 
     </ion-list>

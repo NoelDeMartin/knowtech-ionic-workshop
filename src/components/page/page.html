@@ -2,8 +2,9 @@
 
     <ion-navbar color="primary">
 
-        <ion-title>
-            {{ title }}
+        <ion-title [class.has-subtitle]="hasSubtitle">
+            <span class="title">{{ title }}</span>
+            <span *ngIf="hasSubtitle" class="subtitle">{{ subtitle }}</span>
         </ion-title>
 
     </ion-navbar>
@@ -15,3 +16,5 @@
     <ng-content></ng-content>
 
 </ion-content>
+
+<ng-content select="[footer]"></ng-content>

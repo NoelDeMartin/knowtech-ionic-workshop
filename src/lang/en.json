@@ -19,8 +19,16 @@
     },
 
     "room": {
+        "subtitle": ":members members",
         "send_message": "Send",
         "message_placeholder": "Write a message..."
+    },
+
+    "create-room": {
+        "topic": "Topic",
+        "member": "Member :member (username)",
+        "add_member": "Add Member",
+        "submit": "Create"
     },
 
     "validation": {
