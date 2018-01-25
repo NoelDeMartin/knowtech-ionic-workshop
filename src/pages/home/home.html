@@ -1,4 +1,4 @@
-<page>
+<page [options]="options" [actions]="actions">
 
     <ion-list>
 
@@ -11,11 +11,5 @@
         </ion-item>
 
     </ion-list>
-
-    <div padding>
-        <button ion-button block (click)="createRoom()">
-            {{ 'home.create_room' | translate }}
-        </button>
-    </div>
 
 </page>

@@ -15,13 +15,19 @@
 
     "home": {
         "no_rooms": "You are not member of any chat room",
-        "create_room": "Create Room"
+        "logout": "Logout"
     },
 
     "room": {
         "subtitle": ":members members",
         "send_message": "Send",
         "message_placeholder": "Write a message..."
+    },
+
+    "add-member": {
+        "username": "Username",
+        "submit": "Add",
+        "cancel": "Cancel"
     },
 
     "create-room": {

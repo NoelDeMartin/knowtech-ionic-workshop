@@ -15,7 +15,10 @@ import {
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar }    from '@ionic-native/status-bar';
 
-import { Page }     from '@app/components/page/page';
+import {
+    Page,
+    OptionsMenu
+} from '@app/components/page/page';
 import { Modal }    from '@app/components/modal/modal';
 
 import { TranslatePipe }    from '@app/pipes/Translate';
@@ -48,6 +51,7 @@ import { MyApp } from './app.component';
         RegisterPage,
         CreateRoomModal,
         Page,
+        OptionsMenu,
         Modal,
         TranslatePipe
     ],
@@ -58,6 +62,7 @@ import { MyApp } from './app.component';
     ],
     bootstrap: [IonicApp],
     entryComponents: [
+        OptionsMenu,
         MyApp,
         HomePage,
         RoomPage,

@@ -1,12 +1,17 @@
 import {
     Component,
     ViewChild,
-    ElementRef
+    ElementRef,
 } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import {
+    NavParams,
+    AlertController,
+} from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+
+import { PageAction } from '@app/components/page/page';
 
 import { Chat } from '@app/providers/Chat';
 import { Auth } from '@app/providers/Auth';
@@ -15,7 +20,8 @@ import { Room }     from '@app/models/Room';
 import { Message }  from '@app/models/Message';
 import { User }     from '@app/models/User';
 
-import UI from '@app/utils/UI';
+import UI           from '@app/utils/UI';
+import Translator   from '@app/utils/Translator';
 
 @Component({
     selector: 'page-room',
@@ -30,11 +36,23 @@ export class RoomPage {
 
     message: string = '';
 
+    actions: PageAction[] = [];
+
     private subscription: Subscription;
 
-    constructor(private auth: Auth, private chat: Chat, params: NavParams) {
+    constructor(
+        private auth: Auth,
+        private chat: Chat,
+        private alertCtrl: AlertController,
+        params: NavParams
+    ) {
         this.room = params.get('room');
         this.roomMessages = this.chat.listenRoomMessages(this.room.id);
+
+        this.actions.push({
+            icon: 'person-add',
+            callback: this.addMember.bind(this)
+        });
     }
 
     get user(): User {
@@ -58,6 +76,36 @@ export class RoomPage {
     public sendMessage(): void {
         UI.asyncOperation(this.chat.sendMessage(this.room.id, this.message));
         this.message = '';
+    }
+
+    public addMember(): void {
+        this.alertCtrl.create({
+            title: 'Add member',
+            inputs: [
+                {
+                    name: 'username',
+                    placeholder: Translator.trans('add-member.username')
+                }
+            ],
+            buttons: [
+                {
+                    text: Translator.trans('add-member.cancel'),
+                    role: 'cancel'
+                },
+                {
+                    text: Translator.trans('add-member.submit'),
+                    handler: ({ username }) => {
+                        UI.asyncOperation(
+                            this.chat
+                                .addRoomMember(this.room.id, username)
+                                .then((userId: string) => {
+                                    this.room.memberIds.push(userId);
+                                })
+                        );
+                    }
+                }
+            ]
+        }).present();
     }
 
     private scrollToBottom(): void {

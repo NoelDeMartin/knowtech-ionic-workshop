@@ -36,6 +36,10 @@ export default class Room {
         return message;
     }
 
+    public addMember(user: User): void {
+        this.memberIds.push(user.getId());
+    }
+
     public hasMember(userId: string): boolean {
         return this.memberIds.indexOf(userId) !== null;
     }

@@ -15,4 +15,10 @@ export class Storage {
         return this.has(key)? JSON.parse(localStorage.getItem(key)) : defaultValue;
     }
 
+    public remove(key: string): void {
+        if (this.has(key)) {
+            localStorage.removeItem(key);
+        }
+    }
+
 }

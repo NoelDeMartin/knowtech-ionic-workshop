@@ -107,6 +107,41 @@ app.post('/find-users', (req: Request, res: Response) => {
     res.send(userJsons);
 });
 
+app.post('/add-member', (req: Request, res: Response) => {
+
+    let roomId: string = req.body.room_id;
+    let username: string = req.body.username;
+
+    let newMember: User = null;
+
+    for (let user of users) {
+        if (user.getUsername() == username) {
+            newMember = user;
+            break;
+        }
+    }
+
+    if (newMember == null) {
+        res.status(404).send({
+            error: 'not-found',
+            message: 'User does not exist'
+        });
+    }
+
+    for (let room of rooms) {
+        if (room.getId() == roomId) {
+            room.addMember(newMember);
+            res.send(newMember.getId());
+            return;
+        }
+    }
+
+    res.status(404).send({
+        error: 'not-found',
+        message: 'Room does not exist'
+    });
+});
+
 app.post('/rooms', (req: Request, res: Response) => {
 
     let userId: string = req.body.user_id;

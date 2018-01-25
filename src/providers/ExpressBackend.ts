@@ -55,6 +55,11 @@ export class ExpressBackend extends Backend {
             });
     }
 
+    public logout(): Promise<void> {
+        // nothing to do here
+        return Promise.resolve();
+    }
+
     public findUsersByUsername(usernames: string[]): Promise<User[]> {
         return this
             .request(Config.backend_url + '/find-users', { usernames })
@@ -74,6 +79,14 @@ export class ExpressBackend extends Backend {
             })
             .then((json: RoomJson) => {
                 return new Room(json);
+            });
+    }
+
+    public addRoomMember(roomId: string, username: string): Promise<string> {
+        return this
+            .request(Config.backend_url + '/add-member', {
+                room_id: roomId,
+                username
             });
     }
 

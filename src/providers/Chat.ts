@@ -55,6 +55,10 @@ export class Chat {
         return this.messageObservations[roomId].observable;
     }
 
+    public addRoomMember(roomId: string, username: string): Promise<string> {
+        return this.backend.addRoomMember(roomId, username);
+    }
+
     public sendMessage(roomId: string, message: string): Promise<void> {
         return this.backend.sendMessage(roomId, this.auth.getUser().id, message);
     }

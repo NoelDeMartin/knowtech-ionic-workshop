@@ -49,6 +49,15 @@ export class Auth {
             });
     }
 
+    public logout(): Promise<void> {
+        return this.backend
+            .logout()
+            .then(() => {
+                this.user = null;
+                this.storage.remove(STORAGE_KEY);
+            });
+    }
+
     private loginUser(user: User): void {
         this.user = user;
         this.storage.set(STORAGE_KEY, user);
