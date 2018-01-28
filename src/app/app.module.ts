@@ -18,6 +18,7 @@ import {
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar }    from '@ionic-native/status-bar';
 import { Facebook }     from '@ionic-native/facebook';
+import { ContactsManager }  from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
 
 import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
@@ -68,6 +69,7 @@ import { MyApp } from './app.component';
         Facebook,
         StatusBar,
         SplashScreen,
+        ContactsManager,
         { provide: Backend, useClass: ExpressBackend },
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         { provide: APP_INITIALIZER, useFactory: registerInjector, deps: [Injector], multi: true },
