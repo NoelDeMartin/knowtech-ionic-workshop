@@ -1,0 +1,10 @@
+{
+  "name": "knowtech-chat-contacts-manager",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "knowtech-chat-contacts-manager",
+    "platforms": [
+      "android"
+    ]
+  }
+}
