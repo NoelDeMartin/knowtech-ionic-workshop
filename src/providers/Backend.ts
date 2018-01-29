@@ -17,6 +17,8 @@ export abstract class Backend extends AsyncProvider {
 
     abstract register(username: string, email: string, password: string): Promise<User>;
 
+    abstract loginWithFacebook(id: string, username: string): Promise<User>;
+
     abstract logout(): Promise<void>;
 
     abstract findUsersByUsername(usernames: string[]): Promise<User[]>;

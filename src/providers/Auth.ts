@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 
+import {
+    Facebook,
+    FacebookLoginResponse
+} from '@ionic-native/facebook';
+
 import { User } from '@app/models/User';
 
 import { Backend } from './Backend';
@@ -14,7 +19,11 @@ export class Auth extends AsyncProvider {
 
     private user: User;
 
-    constructor(private storage: Storage, private backend: Backend) {
+    constructor(
+        private storage: Storage,
+        private backend: Backend,
+        private facebook: Facebook
+    ) {
         super();
     }
 
@@ -49,6 +58,26 @@ export class Auth extends AsyncProvider {
             .register(username, email, password)
             .then((user: User) => {
                 this.loginUser(user);
+            });
+    }
+
+    public loginWithFacebook(): Promise<void> {
+        return this.facebook.login(['public_profile', 'email'])
+            .then((response: FacebookLoginResponse) => {
+                if (response.status == 'connected') {
+                    return this.facebook.api('me', ['public_profile'])
+                }
+            })
+            .then((response?: any) => {
+                if (response) {
+                    return this.backend.loginWithFacebook(
+                        response.id,
+                        response.name
+                    );
+                }
+            })
+            .then((user?: User) => {
+                if (user) this.loginUser(user);
             });
     }
 

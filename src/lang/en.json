@@ -5,12 +5,14 @@
     "login": {
         "title": "Login",
         "submit": "Login",
-        "register": "No account? Create one"
+        "register": "No account? Create one",
+        "facebook": "Continue with Facebook"
     },
 
     "register": {
         "title": "Register",
-        "submit": "Create Account"
+        "submit": "Create Account",
+        "facebook": "Continue with Facebook"
     },
 
     "home": {

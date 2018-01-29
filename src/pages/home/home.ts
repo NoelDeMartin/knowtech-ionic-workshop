@@ -12,6 +12,7 @@ import { StatsModal }       from '@app/modals/stats/stats';
 
 import { Chat } from '@app/providers/Chat';
 import { Auth } from '@app/providers/Auth';
+import AsyncProvider from '@app/providers/AsyncProvider';
 
 import { Room } from '@app/models/Room';
 
@@ -50,13 +51,19 @@ export class HomePage {
         });
 
         this.options.push({
+            text: Translator.trans('home.stats'),
+            callback: this.showStats.bind(this)
+        });
+
+        this.options.push({
             text: Translator.trans('home.logout'),
             callback: this.logout.bind(this)
         });
 
-        this.options.push({
-            text: Translator.trans('home.stats'),
-            callback: this.showStats.bind(this)
+        AsyncProvider.sync(auth).then(() => {
+            if (!auth.isLoggedIn()) {
+                navCtrl.setRoot(LoginPage);
+            }
         });
 
     }

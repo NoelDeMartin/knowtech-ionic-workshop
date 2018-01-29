@@ -55,6 +55,14 @@ export class ExpressBackend extends Backend {
             });
     }
 
+    public loginWithFacebook(id: string, username: string): Promise<User> {
+        return this
+            .request(Config.backend_url + '/facebook-login', { id, username })
+            .then((json: UserJson) => {
+                return new User(json);
+            });
+    }
+
     public logout(): Promise<void> {
         // nothing to do here
         return Promise.resolve();

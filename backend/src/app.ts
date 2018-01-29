@@ -91,6 +91,25 @@ app.post('/login', (req: Request, res: Response) => {
     });
 });
 
+app.post('/facebook-login', (req: Request, res: Response) => {
+
+    let id: string = req.body.id;
+    let username: string = req.body.username;
+
+    for (let user of users) {
+        if (user.matchFacebook(id)) {
+            res.send(user.toJson());
+            return;
+        }
+    }
+
+    let user = User.facebook(id, username);
+
+    users.push(user);
+
+    res.send(user.toJson());
+});
+
 app.post('/find-users', (req: Request, res: Response) => {
 
     let usernames: string[] = req.body.usernames;

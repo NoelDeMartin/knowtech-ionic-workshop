@@ -7,10 +7,20 @@ function generateId(): string {
 
 export default class User {
 
+    private isFacebook: boolean = false;
+
     private id: string;
     private username: string;
     private email: string;
     private passwordHash: string;
+
+    static facebook(id: string, username: string): User {
+        let user = new User(username, null, '');
+        user.id = id;
+        user.passwordHash = null;
+        user.isFacebook = true;
+        return user;
+    }
 
     constructor(username: string, email: string, password: string) {
         this.id = generateId();
@@ -21,6 +31,10 @@ export default class User {
 
     public match(email: string, password: string): boolean {
         return this.sameEmail(email) && bcrypt.compareSync(password, this.passwordHash);
+    }
+
+    public matchFacebook(id: string): boolean {
+        return this.isFacebook && this.id == id;
     }
 
     public sameEmail(email: string): boolean {

@@ -57,4 +57,14 @@ export class RegisterPage {
 
     }
 
+    public loginWithFacebook(): void {
+        UI.asyncOperation(
+            this.auth
+                .loginWithFacebook()
+                .then(() => {
+                    this.navCtrl.setRoot('home');
+                })
+        );
+    }
+
 }

@@ -17,6 +17,7 @@ import {
 } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar }    from '@ionic-native/status-bar';
+import { Facebook }     from '@ionic-native/facebook';
 
 import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
@@ -64,6 +65,7 @@ import { MyApp } from './app.component';
         Auth,
         Chat,
         Storage,
+        Facebook,
         StatusBar,
         SplashScreen,
         { provide: Backend, useClass: ExpressBackend },

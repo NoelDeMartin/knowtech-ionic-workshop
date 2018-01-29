@@ -29,6 +29,8 @@ class UI {
                 if (error instanceof Error) {
                     this.showError(error.message);
                 } else {
+                    // Development only
+                    console.error(error);
                     this.showError(Translator.trans('errors.unknown'));
                 }
             });

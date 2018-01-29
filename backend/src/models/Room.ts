@@ -41,7 +41,7 @@ export default class Room {
     }
 
     public hasMember(userId: string): boolean {
-        return this.memberIds.indexOf(userId) !== null;
+        return this.memberIds.indexOf(userId) !== -1;
     }
 
     public toJson(): Object {

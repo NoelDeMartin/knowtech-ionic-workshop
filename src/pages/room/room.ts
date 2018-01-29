@@ -7,6 +7,7 @@ import {
 import {
     NavParams,
     IonicPage,
+    NavController,
     AlertController,
 } from 'ionic-angular';
 
@@ -17,6 +18,9 @@ import { PageAction } from '@app/components/page/page';
 
 import { Chat } from '@app/providers/Chat';
 import { Auth } from '@app/providers/Auth';
+import AsyncProvider from '@app/providers/AsyncProvider';
+
+import { LoginPage } from '@app/pages/login/login';
 
 import { Room }     from '@app/models/Room';
 import { Message }  from '@app/models/Message';
@@ -24,7 +28,6 @@ import { User }     from '@app/models/User';
 
 import UI           from '@app/utils/UI';
 import Translator   from '@app/utils/Translator';
-import AsyncProvider from '@app/providers/AsyncProvider';
 
 @IonicPage({
     name: 'room',
@@ -53,6 +56,7 @@ export class RoomPage {
         private auth: Auth,
         private chat: Chat,
         private alertCtrl: AlertController,
+        navCtrl: NavController,
         params: NavParams
     ) {
         this.actions.push({
@@ -61,19 +65,23 @@ export class RoomPage {
         });
 
         this.ready = AsyncProvider.sync(auth, chat).then(() => {
-            let roomId = params.get('id');
-            let subscription = this.chat.rooms.subscribe((rooms: Room[]) => {
-                if (this.room) {
-                    subscription.unsubscribe();
-                }
-                for (let room of rooms) {
-                    if (room.id == roomId) {
-                        this.room = room;
-                        this.roomMessages = this.chat.listenRoomMessages(this.room.id);
-                        break;
+            if (!auth.isLoggedIn()) {
+                navCtrl.setRoot(LoginPage);
+            } else {
+                let roomId = params.get('id');
+                let subscription = this.chat.rooms.subscribe((rooms: Room[]) => {
+                    if (this.room) {
+                        subscription.unsubscribe();
                     }
-                }
-            });
+                    for (let room of rooms) {
+                        if (room.id == roomId) {
+                            this.room = room;
+                            this.roomMessages = this.chat.listenRoomMessages(this.room.id);
+                            break;
+                        }
+                    }
+                });
+            }
         });
     }
 
@@ -83,14 +91,16 @@ export class RoomPage {
 
     ionViewWillEnter() {
         this.ready.then(() => {
-            let messagesCount = 0;
-            this.subscription = this.roomMessages.subscribe((messages: Message[]) => {
-                if (messagesCount < messages.length) {
-                    messagesCount = messages.length;
-                    UI.nextTick(this.scrollToBottom.bind(this));
-                }
-            });
-        })
+            if (this.auth.isLoggedIn()) {
+                let messagesCount = 0;
+                this.subscription = this.roomMessages.subscribe((messages: Message[]) => {
+                    if (messagesCount < messages.length) {
+                        messagesCount = messages.length;
+                        UI.nextTick(this.scrollToBottom.bind(this));
+                    }
+                });
+            }
+        });
     }
 
     ionViewWillLeave() {
