@@ -1,6 +1,6 @@
 <page [options]="options" [actions]="actions">
 
-    <ion-list>
+    <ion-list *ngIf="rooms">
 
         <button ion-item *ngFor="let room of rooms | async" (click)="openRoom(room)">
             {{ room.topic }}
