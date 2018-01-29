@@ -7,6 +7,8 @@ import {
 
 import Translator from './Translator';
 
+import Config   from '@app/config.json';
+
 import { resolveDependency } from './injector';
 
 class UI {
@@ -29,8 +31,9 @@ class UI {
                 if (error instanceof Error) {
                     this.showError(error.message);
                 } else {
-                    // Development only
-                    console.error(error);
+                    if (Config.env == 'development') {
+                        console.error(error);
+                    }
                     this.showError(Translator.trans('errors.unknown'));
                 }
             });

@@ -1,3 +1,4 @@
 {
-    "backend_url": "http://localhost:3000"
+    "backend_url": ":url",
+    "env": ":env"
 }
