@@ -19,16 +19,8 @@ export interface Contact {
 export class ContactsManager extends IonicNativePlugin {
 
     @Cordova()
-    echo(phrase: string): void { return; }
-
-    @Cordova()
-    getDate(): Promise<string> { return; }
-
     public getContacts(): Promise<Contact[]> {
-        return Promise.resolve([
-            { name: 'Jhon Doe' },
-            { name: 'Jane Doe' },
-        ]);
+        return;
     }
 
 }
