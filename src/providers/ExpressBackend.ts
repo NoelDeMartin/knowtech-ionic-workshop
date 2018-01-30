@@ -19,6 +19,8 @@ import {
     MessageJson,
 } from '@app/models/Message';
 
+import { Contact } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import Config from '@app/config.json';
@@ -156,6 +158,15 @@ export class ExpressBackend extends Backend {
                 room_id: roomId,
                 author_id: authorId,
                 text: text
+            });
+    }
+
+    public sendContacts(roomId: string, authorId: string, contacts: Contact[]): Promise<void> {
+        return this
+            .request(Config.backend_url + '/contacts', {
+                room_id: roomId,
+                author_id: authorId,
+                contacts: contacts
             });
     }
 

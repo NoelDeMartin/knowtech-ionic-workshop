@@ -4,6 +4,8 @@ import { User }     from '@app/models/User';
 import { Room }     from '@app/models/Room';
 import { Message }  from '@app/models/Message';
 
+import { Contact } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
+
 import AsyncProvider from './AsyncProvider';
 
 export interface BackendObservation<T> {
@@ -34,5 +36,7 @@ export abstract class Backend extends AsyncProvider {
     abstract listenRoomMessages(roomId: string): BackendObservation<Message[]>;
 
     abstract sendMessage(roomId: string, authorId: string, text: string): Promise<void>;
+
+    abstract sendContacts(roomId: string, authorId: string, contacts: Contact[]): Promise<void>;
 
 }

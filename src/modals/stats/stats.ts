@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 
 import { ChartDataPoint } from '@app/components/line-chart/line-chart';
 
+import Modal from '../Modal';
+import {
+    NavParams,
+    ViewController,
+} from 'ionic-angular';
+
 @Component({
     selector: 'modal-stats',
     templateUrl: 'stats.html'
 })
-export class StatsModal {
+export class StatsModal extends Modal {
 
     // Fake data
     messagesData: ChartDataPoint[] = [
@@ -31,5 +37,9 @@ export class StatsModal {
             value: 22
         }
     ];
+
+    constructor(viewCtrl: ViewController, navParams: NavParams) {
+        super(viewCtrl, navParams);
+    }
 
 }

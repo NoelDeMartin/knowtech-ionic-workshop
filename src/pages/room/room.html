@@ -18,8 +18,12 @@
                     {{ message.authorUsername }}
                 </span>
 
-                <span class="text">
+                <span *ngIf="!message.isContact" class="text">
                     {{ message.text }}
+                </span>
+
+                <span *ngIf="message.isContact" class="text">
+                    Contact: {{ message.text.name }}
                 </span>
 
                 <span class="info">
@@ -42,6 +46,10 @@
             ></ion-input>
 
             <ion-buttons end>
+
+                <button ion-button icon-only (click)="attach($event)">
+                    <ion-icon name="attach"></ion-icon>
+                </button>
 
                 <button ion-button color="primary" (click)="sendMessage()">
                     {{ 'room.send_message' | translate }}

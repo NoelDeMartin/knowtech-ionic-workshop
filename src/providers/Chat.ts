@@ -4,6 +4,8 @@ import { User }     from '@app/models/User';
 import { Room }     from '@app/models/Room';
 import { Message }  from '@app/models/Message';
 
+import { Contact } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
+
 import { Auth }     from './Auth';
 import { Backend, BackendObservation } from './Backend';
 import { Observable } from 'rxjs/Observable';
@@ -66,6 +68,10 @@ export class Chat extends AsyncProvider {
 
     public sendMessage(roomId: string, message: string): Promise<void> {
         return this.backend.sendMessage(roomId, this.auth.getUser().id, message);
+    }
+
+    public sendContacts(roomId: string, contacts: Contact[]): Promise<void> {
+        return this.backend.sendContacts(roomId, this.auth.getUser().id, contacts);
     }
 
     private prepareRoomMembers(usernames: string[]): Promise<string[]> {

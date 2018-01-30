@@ -77,14 +77,16 @@ class UI {
 
     }
 
-    public showModal(modal: any): void {
+    public showModal(modal: any): Promise<any> {
+        return new Promise((resolve, reject) => {
 
-        if (!this.modalCtrl) {
+            if (!this.modalCtrl) {
                 this.modalCtrl = resolveDependency(ModalController);
             }
 
-        this.modalCtrl.create(modal).present();
+            this.modalCtrl.create(modal, { resolve, reject }).present();
 
+        });
     }
 
     /**

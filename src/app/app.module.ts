@@ -24,8 +24,9 @@ import { LoginPage }    from '@app/pages/login/login';
 import { SplashPage }   from '@app/pages/splash/splash';
 import { RegisterPage } from '@app/pages/register/register';
 
-import { CreateRoomModal }  from '@app/modals/create-room/create-room';
-import { StatsModal }       from '@app/modals/stats/stats';
+import { CreateRoomModal }      from '@app/modals/create-room/create-room';
+import { StatsModal }           from '@app/modals/stats/stats';
+import { AttachContactModal }   from '@app/modals/attach-contact/attach-contact';
 
 import { Backend }          from '@app/providers/Backend';
 import { Auth }             from '@app/providers/Auth';
@@ -45,6 +46,7 @@ import { MyApp } from './app.component';
         RegisterPage,
         CreateRoomModal,
         StatsModal,
+        AttachContactModal,
     ],
     imports: [
         BrowserModule,
@@ -61,6 +63,7 @@ import { MyApp } from './app.component';
         RegisterPage,
         CreateRoomModal,
         StatsModal,
+        AttachContactModal,
     ],
     providers: [
         Auth,

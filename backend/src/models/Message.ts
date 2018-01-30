@@ -8,11 +8,11 @@ function generateId(): string {
 export default class Message {
 
     private id: string;
-    private text: string;
+    private text: string | Object;
     private authorId: string;
     private date: number;
 
-    constructor(text: string, authorId: string, date: number) {
+    constructor(text: string | Object, authorId: string, date: number) {
         this.id = generateId();
         this.text = text;
         this.authorId = authorId;

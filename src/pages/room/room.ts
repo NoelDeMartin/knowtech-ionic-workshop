@@ -8,13 +8,19 @@ import {
     NavParams,
     IonicPage,
     NavController,
+    ViewController,
     AlertController,
+    PopoverController,
 } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Contact } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
+
 import { PageAction } from '@app/components/page/page';
+
+import { AttachContactModal } from '@app/modals/attach-contact/attach-contact';
 
 import { Chat } from '@app/providers/Chat';
 import { Auth } from '@app/providers/Auth';
@@ -56,6 +62,7 @@ export class RoomPage {
         private auth: Auth,
         private chat: Chat,
         private alertCtrl: AlertController,
+        private popoverCtrl: PopoverController,
         navCtrl: NavController,
         params: NavParams
     ) {
@@ -147,6 +154,23 @@ export class RoomPage {
         }).present();
     }
 
+    public attach(event: Event): void {
+        this.popoverCtrl
+            .create(
+                AttachMenu,
+                { callback: this.sendContacts.bind(this) }
+            )
+            .present({
+                ev: event
+            });
+    }
+
+    private sendContacts(contacts?: Contact[]): void {
+        if (contacts) {
+            UI.asyncOperation(this.chat.sendContacts(this.room.id, contacts));
+        }
+    }
+
     private scrollToBottom(): void {
 
         let element = this.messages.nativeElement;
@@ -162,4 +186,31 @@ export class RoomPage {
 
 function isDivElement(object: any): object is HTMLDivElement {
     return object instanceof HTMLDivElement;
+}
+
+@Component({
+    template: `
+        <ion-list>
+            <button ion-item (click)="attachContact()">
+                {{ 'room.attach_contact' | translate }}
+            </button>
+        </ion-list>
+    `
+})
+export class AttachMenu {
+
+    private callback: (result: any) => void;
+
+    constructor(
+        private viewCtrl: ViewController,
+        navParams: NavParams
+    ) {
+        this.callback = navParams.get('callback');
+    }
+
+    public attachContact(): void {
+        UI.showModal(AttachContactModal).then(this.callback);
+        this.viewCtrl.dismiss();
+    }
+
 }

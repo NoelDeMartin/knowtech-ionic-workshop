@@ -36,6 +36,12 @@ export default class Room {
         return message;
     }
 
+    public addContact(contact: Object, authorId: string): Message {
+        let message = new Message(contact, authorId, Date.now());
+        this.messages.push(message);
+        return message;
+    }
+
     public addMember(user: User): void {
         this.memberIds.push(user.getId());
     }

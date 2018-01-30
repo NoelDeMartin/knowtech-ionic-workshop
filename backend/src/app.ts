@@ -225,5 +225,28 @@ app.post('/message', (req: Request, res: Response) => {
     });
 });
 
+app.post('/contacts', (req: Request, res: Response) => {
+
+    let roomId: string = req.body.room_id;
+    let authorId: string = req.body.author_id;
+    let contacts: Object[] = req.body.contacts;
+
+    for (let room of rooms) {
+        if (room.getId() == roomId) {
+            let newMessages: Object[] = [];
+            for (let contact of contacts) {
+                newMessages.push(room.addContact(contact, authorId).toJson(users));
+            }
+            res.send(newMessages);
+            return;
+        }
+    }
+
+    res.status(404).send({
+        error: 'not-found',
+        message: 'Room does not exist'
+    });
+});
+
 const port = 3000;
 app.listen(port, () => console.log('App listening on port ' + port + '!'));

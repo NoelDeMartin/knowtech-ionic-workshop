@@ -5,6 +5,10 @@ import {
     IonicNativePlugin
 } from '@ionic-native/core';
 
+export interface Contact {
+    name: string
+};
+
 @Plugin({
     pluginName: 'ContactsManager',
     plugin: 'knowtech-chat-contacts-manager',
@@ -19,5 +23,12 @@ export class ContactsManager extends IonicNativePlugin {
 
     @Cordova()
     getDate(): Promise<string> { return; }
+
+    public getContacts(): Promise<Contact[]> {
+        return Promise.resolve([
+            { name: 'Jhon Doe' },
+            { name: 'Jane Doe' },
+        ]);
+    }
 
 }
