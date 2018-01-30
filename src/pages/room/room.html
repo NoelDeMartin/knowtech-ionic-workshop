@@ -26,6 +26,10 @@
                     Contact: {{ message.text.name }}
                 </span>
 
+                <button ion-button *ngIf="message.isContact" (click)="addContact(message.text)">
+                    {{ 'room.add_contact' | translate }}
+                </button>
+
                 <span class="info">
                     {{ message.date.calendar() }}
                 </span>

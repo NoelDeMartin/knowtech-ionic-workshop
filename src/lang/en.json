@@ -23,6 +23,7 @@
 
     "room": {
         "subtitle": ":members members",
+        "add_contact": "Add",
         "send_message": "Send",
         "message_placeholder": "Write a message...",
         "attach_contact": "Send contact"

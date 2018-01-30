@@ -33,6 +33,7 @@
     "chart.js": "^2.7.1",
     "cordova-android": "7.0.0",
     "cordova-plugin-device": "^1.1.4",
+    "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-statusbar": "^2.4.1",
@@ -61,11 +62,11 @@
       "cordova-plugin-splashscreen@4.0.1": {},
       "cordova-plugin-statusbar@2.4.1": {},
       "cordova-plugin-ionic-webview@1.1.11": {},
+      "knowtech-chat-contacts-manager": {},
       "cordova-plugin-facebook4@1.9.1": {
         "APP_ID": "327035474453232",
         "APP_NAME": "Knowtech Chat"
-      },
-      "knowtech-chat-contacts-manager": {}
+      }
     },
     "platforms": [
       "android"

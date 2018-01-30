@@ -37,6 +37,10 @@ page-room {
                 opacity: 0.5;
             }
 
+            button .button-inner {
+                height: auto;
+            }
+
             &:after {
                 content: ' ';
                 position: absolute;

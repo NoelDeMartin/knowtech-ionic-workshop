@@ -23,4 +23,9 @@ export class ContactsManager extends IonicNativePlugin {
         return;
     }
 
+    @Cordova()
+    public addContact(contact: Contact): Promise<void> {
+        return;
+    }
+
 }

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.provider.ContactsContract;
@@ -39,6 +40,13 @@ public class ContactsManager extends CordovaPlugin {
 
     if(action.equals("getContacts")) {
       this.getContacts();
+    } else if (action.equals("addContact")) {
+      Contact contact = Contact.fromJson(args.getJSONObject(0));
+      Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+      intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+      contact.populateIntent(intent);
+      this.cordova.getActivity().getApplicationContext().startActivity(intent);
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
     }
 
     return true;

@@ -16,7 +16,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Contact } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
+import { Contact, ContactsManager } from '@app/plugins/knowtech-chat-contacts-manager/ionic-native';
 
 import { PageAction } from '@app/components/page/page';
 
@@ -63,6 +63,7 @@ export class RoomPage {
         private chat: Chat,
         private alertCtrl: AlertController,
         private popoverCtrl: PopoverController,
+        private contactsManager: ContactsManager,
         navCtrl: NavController,
         params: NavParams
     ) {
@@ -152,6 +153,10 @@ export class RoomPage {
                 }
             ]
         }).present();
+    }
+
+    public addContact(contact: Contact): void {
+        this.contactsManager.addContact(contact);
     }
 
     public attach(event: Event): void {
