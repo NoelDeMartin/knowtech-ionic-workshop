@@ -41,16 +41,6 @@ import Config from '@app/config.json';
 
 import { MyApp } from './app.component';
 
-function getBackendClass(): any {
-    switch (Config.backend) {
-        case 'express':
-            return ExpressBackend;
-        default:
-        case 'firebase':
-            return FirebaseBackend;
-    }
-}
-
 @NgModule({
     declarations: [
         MyApp,
@@ -86,7 +76,7 @@ function getBackendClass(): any {
         StatusBar,
         SplashScreen,
         ContactsManager,
-        { provide: Backend, useClass: getBackendClass() },
+        { provide: Backend, useClass: Config.backend == 'express'? ExpressBackend : FirebaseBackend },
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         { provide: APP_INITIALIZER, useFactory: registerInjector, deps: [Injector], multi: true },
     ]
