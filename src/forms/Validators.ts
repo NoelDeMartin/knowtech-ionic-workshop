@@ -10,7 +10,10 @@ export class Validators extends AngularValidators {
         return (control: AbstractControl): { [key: string]: any} => {
 
             if (!isEmptyInputValue(control) && control.parent) {
-                if (!isEmptyInputValue(control.parent.controls[dependency])) {
+                if (
+                    !isEmptyInputValue(control.parent.controls[dependency]) &&
+                    control.parent.controls[dependency].value !== control.value
+                ) {
                     return { equals: true };
                 }
             }

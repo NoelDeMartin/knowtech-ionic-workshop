@@ -76,18 +76,21 @@ export class RoomPage {
             if (!auth.isLoggedIn()) {
                 navCtrl.setRoot(LoginPage);
             } else {
-                let roomId = params.get('id');
-                let subscription = this.chat.rooms.subscribe((rooms: Room[]) => {
-                    if (this.room) {
-                        subscription.unsubscribe();
-                    }
-                    for (let room of rooms) {
-                        if (room.id == roomId) {
-                            this.room = room;
-                            this.roomMessages = this.chat.listenRoomMessages(this.room.id);
-                            break;
+                return new Promise<void>((resolve, reject) => {
+                    let roomId = params.get('id');
+                    let subscription = this.chat.rooms.subscribe((rooms: Room[]) => {
+                        if (this.room) {
+                            subscription.unsubscribe();
                         }
-                    }
+                        for (let room of rooms) {
+                            if (room.id == roomId) {
+                                this.room = room;
+                                this.roomMessages = this.chat.listenRoomMessages(this.room.id);
+                                resolve();
+                                return;
+                            }
+                        }
+                    });
                 });
             }
         });
@@ -95,6 +98,14 @@ export class RoomPage {
 
     get user(): User {
         return this.auth.getUser();
+    }
+
+    get title(): string {
+        return this.room? this.room.topic : '';
+    }
+
+    get membersCount(): number {
+        return this.room ? this.room.memberIds.length : 0;
     }
 
     ionViewWillEnter() {

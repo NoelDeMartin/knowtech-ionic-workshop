@@ -1,11 +1,10 @@
 <page
-    *ngIf="room"
-    [title]="room.topic"
+    [title]="title"
     [actions]="actions"
-    subtitle="{{ 'room.subtitle' | translate: { members: room.memberIds.length } }}"
+    subtitle="{{ 'room.subtitle' | translate: { members: membersCount } }}"
 >
 
-    <div class="messages" #messages padding>
+    <div *ngIf="room" class="messages" #messages padding>
 
         <div *ngFor="let message of roomMessages | async" [ngClass]="{
                 'message': true,
