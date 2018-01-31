@@ -31,12 +31,25 @@ import { AttachContactModal }   from '@app/modals/attach-contact/attach-contact'
 import { Backend }          from '@app/providers/Backend';
 import { Auth }             from '@app/providers/Auth';
 import { ExpressBackend }   from '@app/providers/ExpressBackend';
+import { FirebaseBackend }  from '@app/providers/FirebaseBackend';
 import { Storage }          from '@app/providers/Storage';
 import { Chat }             from '@app/providers/Chat';
 
 import { registerInjector } from '@app/utils/injector';
 
+import Config from '@app/config.json';
+
 import { MyApp } from './app.component';
+
+function getBackendClass(): any {
+    switch (Config.backend) {
+        case 'express':
+            return ExpressBackend;
+        default:
+        case 'firebase':
+            return FirebaseBackend;
+    }
+}
 
 @NgModule({
     declarations: [
@@ -73,7 +86,7 @@ import { MyApp } from './app.component';
         StatusBar,
         SplashScreen,
         ContactsManager,
-        { provide: Backend, useClass: ExpressBackend },
+        { provide: Backend, useClass: getBackendClass() },
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         { provide: APP_INITIALIZER, useFactory: registerInjector, deps: [Injector], multi: true },
     ]
