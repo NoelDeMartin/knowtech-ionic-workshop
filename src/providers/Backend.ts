@@ -31,7 +31,7 @@ export abstract class Backend extends AsyncProvider {
 
     // A real world use-case would use pagination and provide a login token,
     // not only the user id.
-    abstract listenRooms(userId: string): BackendObservation<Room[]>;
+    abstract listenRooms(userId: string | null): BackendObservation<Room[]>;
 
     abstract listenRoomMessages(roomId: string): BackendObservation<Message[]>;
 

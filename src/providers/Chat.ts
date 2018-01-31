@@ -15,7 +15,7 @@ import AsyncProvider from './AsyncProvider';
 @Injectable()
 export class Chat extends AsyncProvider {
 
-    private roomsObservable: Observable<Room[]> = null;
+    private roomsObservation: BackendObservation<Room[]> = null;
 
     private messageObservations: {
         [roomId: string]: BackendObservation<Message[]>
@@ -29,15 +29,18 @@ export class Chat extends AsyncProvider {
         return AsyncProvider
             .sync(this.backend, this.auth)
             .then(() => {
-                // TODO listen user auth status
-                if (this.auth.isLoggedIn()) {
-                    this.roomsObservable = this.backend.listenRooms(this.auth.getUser().id).observable;
-                }
+                let user = this.auth.getUser();
+                this.roomsObservation = this.backend.listenRooms(user? user.id : null);
+                this.auth.listenLoginStatus().observable.subscribe(() => {
+                    this.roomsObservation.unsubscribe();
+                    let user = this.auth.getUser();
+                    this.roomsObservation = this.backend.listenRooms(user ? user.id : null);
+                });
             });
     }
 
     get rooms(): Observable<Room[]> {
-        return this.roomsObservable;
+        return this.roomsObservation ? this.roomsObservation.observable : null;
     }
 
     public createRoom(topic: string, memberUsernames: string[]): Promise<Room> {

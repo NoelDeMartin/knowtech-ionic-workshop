@@ -111,6 +111,20 @@ export class FirebaseBackend extends Backend {
             });
     }
 
+    public listenLoginStatus(): BackendObservation<void> {
+
+        let loginStatus: BehaviorSubject<void> = new BehaviorSubject(null);
+
+        let unsubscribe = Firebase.auth().onAuthStateChanged(() => {
+            loginStatus.next(null);
+        });
+
+        return {
+            observable: loginStatus.asObservable(),
+            unsubscribe: unsubscribe
+        };
+    }
+
     public findUsersByUsername(usernames: string[]): Promise<User[]> {
         return this.findUsers('username', usernames);
     }
@@ -173,10 +187,17 @@ export class FirebaseBackend extends Backend {
             });
     }
 
-    public listenRooms(userId: string): BackendObservation<Room[]> {
+    public listenRooms(userId: string | null): BackendObservation<Room[]> {
 
         let roomsSubject = new BehaviorSubject<Room[]>([]);
         let rooms: Room[] = [];
+
+        if (userId == null) {
+            return {
+                observable: roomsSubject.asObservable(),
+                unsubscribe: () => {}
+            };
+        }
 
         let unsubscribe =
             Firebase

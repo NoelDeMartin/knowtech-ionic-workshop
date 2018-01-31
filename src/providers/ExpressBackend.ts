@@ -100,9 +100,16 @@ export class ExpressBackend extends Backend {
             });
     }
 
-    public listenRooms(userId: string): BackendObservation<Room[]> {
+    public listenRooms(userId: string | null): BackendObservation<Room[]> {
 
         let subject: BehaviorSubject<Room[]> = new BehaviorSubject([]);
+
+        if (userId == null) {
+            return {
+                observable: subject.asObservable(),
+                unsubscribe: () => { }
+            };
+        }
 
         let request = () => {
             this.request(Config.backend_url + '/rooms', { user_id: userId })

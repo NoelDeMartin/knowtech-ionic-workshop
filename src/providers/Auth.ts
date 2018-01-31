@@ -12,10 +12,20 @@ import { Storage } from './Storage';
 
 import AsyncProvider from './AsyncProvider';
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
 const STORAGE_KEY = "Auth";
+
+export interface Observation<T> {
+    observable: Observable<T>;
+    unsubscribe: Function;
+}
 
 @Injectable()
 export class Auth extends AsyncProvider {
+
+    private loginStatus: BehaviorSubject<void> = new BehaviorSubject(null);
 
     private user: User;
 
@@ -87,12 +97,21 @@ export class Auth extends AsyncProvider {
             .then(() => {
                 this.user = null;
                 this.storage.remove(STORAGE_KEY);
+                this.loginStatus.next(null);
             });
+    }
+
+    public listenLoginStatus(): Observation<void> {
+        return {
+            observable: this.loginStatus.asObservable(),
+            unsubscribe: () => { }
+        };
     }
 
     private loginUser(user: User): void {
         this.user = user;
         this.storage.set(STORAGE_KEY, user);
+        this.loginStatus.next(null);
     }
 
 }
