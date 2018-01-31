@@ -7,8 +7,6 @@ import {
     Nav,
     Platform,
 } from 'ionic-angular';
-import { StatusBar }    from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SplashPage }   from '@app/pages/splash/splash';
 import { LoginPage }    from '@app/pages/login/login';
@@ -34,8 +32,6 @@ export class MyApp {
         chat: Chat,
         backend: Backend,
         platform: Platform,
-        statusBar: StatusBar,
-        splashScreen: SplashScreen
     ) {
 
         AsyncProvider.sync(backend, auth, chat)
@@ -44,10 +40,6 @@ export class MyApp {
                     this.rootPage = auth.isLoggedIn() ? 'home' : LoginPage;
                 }
             });
-
-        platform.ready().then(() => {
-            splashScreen.hide();
-        });
 
     }
 

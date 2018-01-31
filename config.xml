@@ -55,5 +55,5 @@
         <variable name="APP_NAME" value="Knowtech Chat" />
     </plugin>
     <allow-navigation href="*" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="~4.1.0" />
 </widget>
